@@ -1,8 +1,28 @@
 
 body {
-    background: #aaaaaa;
+    background: #8e3d9a;
     font-size: 80%;
+    font-family: system-ui;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
   }
+
+label {
+    pointer-events: none
+}
+
+
+text{
+    pointer-events: none;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
 
 .center-panel{
     background: white;
@@ -11,27 +31,67 @@ body {
     padding: 20px;
     margin: 20px;
     display: flex;
-    /* flex-direction: column; */
     justify-content: center;
-    /* resize: vertical; */
     overflow: auto;
 }
 
 .card{
-    /* width: 50%;
-    border: 3 px solid blue;
-    padding: 10px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center; */
-    font-size: 90px;
+    font-size: 100px;
     font-family: sans-serif;
+    font-weight: 900;
     border: 3 px solid blue;
-
     background: white;
-    color: blue;
+    color: #0000d6;
     padding: 20px;
-    /* resize: vertical; */
     overflow: auto;
+}
+
+.button {
+    height: 33px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #e9d7f1;
+    color: #000000;
+    font-size: 25px;
+    border: 1px solid #222222;
+}
+
+
+/*   Button   */
+.button:hover {
+    background-color: #555555;
+    border: 1px solid #000000;
+}
+
+.button:active {
+    background-color: #555555;
+    border: 1px solid #222222;
+}
+
+.button:focus {
+    outline: none;
+}
+
+.disabled {
+    opacity: 0.6;
+    pointer-events: none
+}
+
+input[type=checkbox] {
+    font-size:24px;
+    vertical-align:middle;
+    cursor:pointer;
+
+}
+
+.checkbox {
+    border: 1px solid #222222;
+    padding: 1px;
+    padding-right: 8px;
+    padding-left: 8px;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
 }

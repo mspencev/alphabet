@@ -5,9 +5,17 @@
 
 const ALPH_LEN = 26;
 let alphabet = []; // list of capital alphabet caracters
+let previous = [];
 let random = false;
+let currentLetter = '';
 
 let cardDiv;
+
+//////  DOM VARIABLES
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const resetBtn = document.getElementById('reset-btn');
+const randomCbSpan = document.getElementById('random-cb-span');
 
 
 //  Load the association svg into the DOM
@@ -19,22 +27,66 @@ function init() {
 
     cardDiv = document.getElementsByClassName('card')[0];
 
-    //////  DOM VARIABLES
-    const nextBtn = document.getElementById('next-btn');
-    const resetBtn = document.getElementById('reset-btn');
-    const randomCb = document.getElementById('random-cb');
-
     /////  ADD LISTENERS
+    prevBtn.addEventListener('click', onPrevious);
     nextBtn.addEventListener('click', onNext);
     resetBtn.addEventListener('click', onReset);
-
-    randomCb.addEventListener('change', () => {
-        random = randomCb.checked;
-    });
+    randomCbSpan.addEventListener('click', onRandom);
 
     // Show the right app
+    onReset();
+}
+
+
+const onPrevious = () => {
+    let next = '';
+    if(random) {
+        next = nextRandom(previous)
+    } else {
+        next = previous.pop();
+    }
+
+    if(previous.length > 0){
+        alphabet.push(next);
+    }
+    alphabet.sort();
+    cardDiv.innerHTML = next;
+
+    updateButtonState();
+}
+
+const onNext = () => {
+    let next = '';
+
+    if(random){
+        next = nextRandom(alphabet);
+    } else {
+        next = alphabet.shift();
+    }
+
+    if(alphabet.length > 0) {
+        previous.push(next);
+    }
+    cardDiv.innerHTML = next;
+    currentLetter = next;
+    
+    updateButtonState();
+}
+
+const onReset = () => {
+    alphabet = getCapitalAlphabet();
+    previous = [];
+
     onNext();
 }
+
+const onRandom = () => {
+    random = !random;
+    console.log('random = ', random);
+    const fa = random ? 'check-square' : 'square';
+    randomCbSpan.children[0].setAttribute('data-icon', fa);
+};
+
 
 /**
  * Returns an upper-case alphabet array.
@@ -45,26 +97,24 @@ const getCapitalAlphabet = () => {
     return String.fromCharCode.apply(null, ascii).split('');
 }
 
-const onNext = () => {
-    if(alphabet.length === 0) {
-        cardDiv.innerHTML = 'End';
-    } else if(random) {
-        cardDiv.innerHTML = nextRandom();
-    } else {
-        cardDiv.innerHTML = alphabet.shift();
-    }
-}
-
-const onReset = () => {
-    alphabet = getCapitalAlphabet();
-    onNext();
-}
-
 /**
  * Return a random letter that hasn't been seen yet
  */
-const nextRandom = () => {
+const nextRandom = (letterList) => {
+    const idx = Math.floor(Math.random() * 100) % letterList.length;
+    return letterList.splice(idx, 1);
+}
 
-    const idx = Math.floor(Math.random() * 100) % alphabet.length;
-    return alphabet.splice(idx, 1);
+const updateButtonState = () => {
+    if(alphabet.length === 0){
+        nextBtn.classList.add('disabled');
+    } else {
+        nextBtn.classList.remove('disabled');
+    }
+    
+    if(previous.length === 0){
+        prevBtn.classList.add('disabled');
+    } else {
+        prevBtn.classList.remove('disabled');
+    }
 }

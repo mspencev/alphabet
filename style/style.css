@@ -1,6 +1,6 @@
 
 body {
-    background: #8e3d9a;
+    background: #048fa77a;
     font-size: 80%;
     font-family: system-ui;
     user-select: none;
@@ -11,7 +11,9 @@ body {
   }
 
 label {
-    pointer-events: none
+    pointer-events: none;
+    padding-left: 10px;
+
 }
 
 
@@ -26,6 +28,7 @@ text{
 
 .center-panel{
     background: white;
+    opacity: 1.0;
     height: 100%;
     width: 300px;
     padding: 20px;
@@ -50,7 +53,7 @@ text{
     height: 33px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #e9d7f1;
+    background-color: #048fa7;
     color: #000000;
     font-size: 25px;
     border: 1px solid #222222;
@@ -59,12 +62,12 @@ text{
 
 /*   Button   */
 .button:hover {
-    background-color: #555555;
+    background-color: #037286;
     border: 1px solid #000000;
 }
 
 .button:active {
-    background-color: #555555;
+    background-color: #037286;
     border: 1px solid #222222;
 }
 
